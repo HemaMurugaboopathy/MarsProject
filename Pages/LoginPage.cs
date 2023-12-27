@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Mars.Utilities;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace Mars.Pages
 {
-    public class LoginPage
+    public class LoginPage: CommonDriver
     {
-        public void LoginActions(IWebDriver driver)
+        public void LoginActions()
         {
-            //Open browser
-            driver.Navigate().GoToUrl("http://localhost:5000/");
+            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"home\"]/div/div/div[1]/div/a", 3);
 
             //Navigate to Sign In
             IWebElement signinButton = driver.FindElement(By.XPath("//*[@id=\"home\"]/div/div/div[1]/div/a"));

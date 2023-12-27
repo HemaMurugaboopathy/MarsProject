@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using Mars.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Mars.Pages
 {
-    public class SkillsPage
+    public class SkillsPage: CommonDriver
     {
-        public void Create_SkillsPage(IWebDriver driver)
+        public void Create_SkillsPage(string skill, string skilllevel)
         {
             //Create add new button
             IWebElement addnewButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/thead/tr/th[3]/div"));
