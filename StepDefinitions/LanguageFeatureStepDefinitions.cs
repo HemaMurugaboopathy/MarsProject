@@ -20,9 +20,9 @@ namespace Mars.StepDefinitions
         }
 
         [When(@"I create a new '([^']*)' and '([^']*)'")]
-        public void WhenICreateANewAnd(string language, string languagelevel)
+        public void WhenICreateANewAnd(string language, string languageLevel)
         {
-            languagePageobj.Create_LanguagePage(language, languagelevel);
+            languagePageobj.Create_LanguagePage(language, languageLevel);
         }
 
         [Then(@"the '([^']*)' and '([^']*)' should be created successfully")]
@@ -35,35 +35,37 @@ namespace Mars.StepDefinitions
             Assert.That(newLanguageLevel == languageLevel, "Actual language level and expected language level do not match");
         }
 
-
         [When(@"I edit an existing '([^']*)' and '([^']*)'")]
-        public void WhenIEditAnExistingAnd(string language, string languagelevel)
+        public void WhenIEditAnExistingAnd(string existingLanguage, string existingLanguageLevel)
         {
-            languagePageobj.Edit_LanguagePage(language, languagelevel);
+            languagePageobj.Edit_LanguagePage(existingLanguage, existingLanguageLevel);
         }
 
         [Then(@"the '([^']*)' and '([^']*)' should be updated successfully")]
-        public void ThenTheAndShouldBeUpdatedSuccessfully(string language, string languagelevel)
+        public void ThenTheAndShouldBeUpdatedSuccessfully(string newLanguage, string newLanguageLevel)
         {
-            string editLanguage = languagePageobj.editLanguage();
-            string editLanguageLevel = languagePageobj.editLanguageLevel();
+            languagePageobj.Update_LanguagePage(newLanguage, newLanguageLevel);
 
-            Assert.That(editLanguage == language, "Actual language and expected language do not match");
-            Assert.That(editLanguageLevel == languagelevel, "Actual language level and expected language level do not match");
+            string updatedLanguage = languagePageobj.getLanguage(newLanguage);
+            string updatedLanguageLevel = languagePageobj.getLanguageLevel(newLanguageLevel);
+
+            Assert.That(updatedLanguage == newLanguage, "Actual language and expected language do not match");
+            Assert.That(updatedLanguageLevel == newLanguageLevel, "Actual language level and expected language level do not match");
         }
 
-        [When(@"I delete an existing '([^']*)' and '([^']*)'")]
-        public void WhenIDeleteAnExistingAnd(string language)
+        [When(@"I delete an existing '([^']*)'")]
+        public void WhenIDeleteAnExisting(string language)
         {
             languagePageobj.Delete_LanguagePage(language);
         }
 
-        [Then(@"the '([^']*)' and '([^']*)' should be deleted successfully")]
-        public void ThenTheAndShouldBeDeletedSuccessfully(string language)
+        [Then(@"the '([^']*)' should be deleted successfully")]
+        public void ThenTheShouldBeDeletedSuccessfully(string language)
         {
-            string deleteLanguage = languagePageobj.deleteLanguage();
+            string deleteLanguage = languagePageobj.deleteLanguage(language);
 
-            Assert.That(deleteLanguage != language, "Language get deleted successfully");
+            Assert.That(deleteLanguage == null, "Language get deleted successfully");
         }
+
     }
 }
