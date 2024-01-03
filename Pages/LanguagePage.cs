@@ -9,6 +9,7 @@ namespace Mars.Pages
     {
         public void Create_LanguagePage(string language, string languageLevel)
         {
+            Thread.Sleep(2000);
 
             //Create add new button
             IWebElement addNewButton = driver.FindElement(By.XPath("//div[@class='twelve wide column scrollTable']//th[@class='right aligned']/div"));
@@ -41,7 +42,7 @@ namespace Mars.Pages
             return newLanguageLevel.Text;
         }
 
-        public void Edit_LanguagePage(string existingLanguage, string existingLanguageLevel)
+        public void Edit_LanguagePage(string existingLanguage, string existinLanguageLevel)
         {
             Wait.WaitToBeClickable(driver, "XPath", $"//div[@class='twelve wide column scrollTable']//td[text()='{existingLanguage}']/following-sibling::td[last()]/span[1]", 5);
 
