@@ -31,6 +31,36 @@ Scenario Outline: Delete the existing language
 	| language |
 	| Java     |
 
+Scenario Outline: Leave the languauge textbox empty
+	Given I logged in Mars portal successfully
+	When I create a new '<language>' and '<language level>'
+	Then the '<language>' should not be created
+
+	Examples: 
+	| language | language level |
+	|            | Fluent          |
+
+Scenario Outline: Add special character in language field
+	Given I logged in Mars portal successfully
+	When I create a new '<language>' and '<language level>'
+	Then the '<language>' should not be created
+
+	Examples: 
+	| language | language level |
+	| !@#$     | Fluent         |
+
+Scenario Outline: Check if user able to cancel language and level field while editing the field
+	Given I logged in Mars portal successfully
+	When I edit an existing '<existing Language>' and '<existing Language Level>'
+	Then I have to cancel by clicking cancel button
+
+	Examples: 
+	| existing Language | existing Language Level |
+	| Python            | Basic                   |
+
+
+
+
 
 
 

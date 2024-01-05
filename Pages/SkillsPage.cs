@@ -50,16 +50,17 @@ namespace Mars.Pages
         }
         public void Edit_SkillsPage(string existingSkills, String existingSkillsLevel)
         {
+            Thread.Sleep(2000);
 
             //Click edit icon 
-            IWebElement editIcon = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody/tr/td[3]/span[1]/i"));
+            IWebElement editIcon = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[1]/i"));
             editIcon.Click();
 
         }
         public void Update_SkillsPage(string newSkills, string newSkillLevel)
         { 
             //Edit the skill in the textbox
-            IWebElement editTextbox = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody/tr/td/div/div[1]/input"));
+            IWebElement editTextbox = driver.FindElement(By.XPath("//input[@placeholder='Add Skill']"));
             editTextbox.Clear();
             editTextbox.SendKeys(newSkills);
             Thread.Sleep(2000);
@@ -74,13 +75,47 @@ namespace Mars.Pages
             updateButton.Click();
             Thread.Sleep(2000);
         }
-        public void Delete_SkillsPage(IWebDriver driver)
+
+        public string getUpdatedSkills(string skills)
         {
+            try
+            {
+                IWebElement newSkills = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[contains(text(), '{skills}')]"));
+                return newSkills.Text;
+            }
+            catch (NoSuchElementException)
+            {
+                return null;
+            }
+        }
+
+        public string getUpdatedSkillLevel(string skillLevel)
+        {
+            IWebElement newSkillLevel = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[text()='{skillLevel}']"));
+            return newSkillLevel.Text;
+        }
+
+        public void Delete_SkillsPage(string existingSkills)
+        {
+            Thread.Sleep(3000);
 
             //Delete the skill
-            IWebElement deleteIcon = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody/tr/td[3]/span[2]/i"));
+            IWebElement deleteIcon = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[text()='{existingSkills}']"));
             deleteIcon.Click();
-            Thread.Sleep(3000);
+            
+        }
+
+        public string deleteSkills(string skills)
+        {
+            try
+            {
+                IWebElement deleteLanguage = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[text()='{skills}']"));
+                return deleteLanguage.Text;
+            }
+            catch (NoSuchElementException)
+            {
+                return null;
+            }
         }
     }
 }

@@ -51,6 +51,29 @@ namespace Mars.StepDefinitions
             Assert.That(updatedSkill == newSkill, "Actual language and expected language do not match");
             Assert.That(updatedSkillLevel == newSkillLevel, "Actual language level and expected language level do not match");
         }
+        [When(@"I delete an existing '([^']*)' in skill page")]
+        public void WhenIDeleteAnExistingInSkillPage(string existingSkills)
+        {
+            skillsPageobj.Delete_SkillsPage(existingSkills);
+        }
+
+        [Then(@"the '([^']*)' should be deleted successfully in skill page")]
+        public void ThenTheShouldBeDeletedSuccessfullyInSkillPage(string skill)
+        {
+            string deleteSkills = skillsPageobj.deleteSkills(skill);
+
+            Assert.That(deleteSkills == null, "Skill get deleted successfully");
+
+        }
+
+        [Then(@"the '([^']*)' should not to be created")]
+        public void ThenTheShouldNotToBeCreated(string newSkills)
+        {
+            string updatedSkills = skillsPageobj.getUpdatedSkills(newSkills);
+
+
+            Assert.That(updatedSkills == null, "Empty text box not created");
+        }
 
     }
 }

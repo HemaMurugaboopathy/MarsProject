@@ -9,7 +9,7 @@ namespace Mars.Pages
     {
         public void Create_LanguagePage(string language, string languageLevel)
         {
-            Thread.Sleep(2000);
+            Thread.Sleep(3000);
 
             //Create add new button
             IWebElement addNewButton = driver.FindElement(By.XPath("//div[@class='twelve wide column scrollTable']//th[@class='right aligned']/div"));
@@ -69,8 +69,44 @@ namespace Mars.Pages
             IWebElement updateButton = driver.FindElement(By.XPath("//input[@value='Update']"));
             updateButton.Click();
             Thread.Sleep(2000);
+
         }
 
+        public string getUpdatedLanguage(string language)
+        {
+            try
+            {
+                IWebElement newLanguage = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[contains(text(), '{language}')]"));
+                return newLanguage.Text;
+            }
+            catch (NoSuchElementException)
+            {
+                return null;
+            }
+        }
+
+        public string getUpdatedLanguageLevel(string languageLevel)
+        {
+            IWebElement newLanguageLevel = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[text()='{languageLevel}']"));
+            return newLanguageLevel.Text;
+        }
+        public void Cancel_LanguagePage(string existingLanguage)
+        {
+            Wait.WaitToBeClickable(driver, "XPath", $"//div[@class='twelve wide column scrollTable']//td[text()='{existingLanguage}']/following-sibling::td[last()]/span[1]", 5);
+
+            //Click edit icon 
+            IWebElement editIcon = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[text()='{existingLanguage}']/following-sibling::td[last()]/span[1]"));
+            editIcon.Click();
+
+            //Cancel the language
+            IWebElement cancelButton = driver.FindElement(By.XPath("//input[@value='Cancel']"));
+            cancelButton.Click();
+        }
+        public string getCancelLanguage()
+        {
+            IWebElement cancelButton = driver.FindElement(By.XPath("//input[@value='Cancel']"));
+            return cancelButton.Text;
+        }
         public void Delete_LanguagePage(string existingLanguage)
         {
             Wait.WaitToBeClickable(driver, "XPath", $"//div[@class='twelve wide column scrollTable']//td[text()='{existingLanguage}']/following-sibling::td[last()]/span[2]", 5);

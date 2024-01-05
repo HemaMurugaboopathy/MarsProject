@@ -66,6 +66,34 @@ namespace Mars.StepDefinitions
 
             Assert.That(deleteLanguage == null, "Language get deleted successfully");
         }
+        [Then(@"the '([^']*)' should not be created")]
+        public void ThenTheShouldNotBeCreated(string newLanguage)
+        {
+
+            string updatedLanguage = languagePageobj.getUpdatedLanguage(newLanguage);
+
+
+            Assert.That(updatedLanguage == null, "Empty text box not created");
+
+        }
+
+        [Then(@"the '([^']*)' not to be created")]
+        public void ThenTheNotToBeCreated(string newLanguage)
+        {
+            string updatedLanguage = languagePageobj.getUpdatedLanguage(newLanguage);
+
+
+            Assert.That(updatedLanguage == null, "Special characters are not allowed");
+        }
+        [Then(@"I have to cancel by clicking cancel button")]
+        public void ThenIHaveToCancelByClickingCancelButton()
+        {
+            
+            string cancelLanguage = languagePageobj.getCancelLanguage();
+
+            Assert.That(cancelLanguage == null, "Canceled successfully");
+        }
+
 
     }
 }
