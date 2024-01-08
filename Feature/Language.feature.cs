@@ -75,10 +75,10 @@ namespace Mars.Feature
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Add a new language with valid details")]
+        [NUnit.Framework.DescriptionAttribute("01- Add a new language with valid details")]
         [NUnit.Framework.CategoryAttribute("tag1")]
         [NUnit.Framework.TestCaseAttribute("Python", "Basic", null)]
-        public void AddANewLanguageWithValidDetails(string language, string languageLevel, string[] exampleTags)
+        public void _01_AddANewLanguageWithValidDetails(string language, string languageLevel, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "tag1"};
@@ -90,8 +90,8 @@ namespace Mars.Feature
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("language", language);
             argumentsOfScenario.Add("language level", languageLevel);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new language with valid details", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 7
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("01- Add a new language with valid details", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -101,13 +101,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 8
+#line 9
  testRunner.Given("I logged in Mars portal successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 9
+#line 10
  testRunner.When(string.Format("I create a new \'{0}\' and \'{1}\'", language, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 10
+#line 11
  testRunner.Then(string.Format("the \'{0}\' and \'{1}\' should be created successfully", language, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -115,9 +115,9 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Edit the existing language")]
+        [NUnit.Framework.DescriptionAttribute("02- Edit the existing language")]
         [NUnit.Framework.TestCaseAttribute("Python", "Basic", "Java", "Fluent", null)]
-        public void EditTheExistingLanguage(string existingLanguage, string existingLanguageLevel, string newLanguage, string newLanguageLevel, string[] exampleTags)
+        public void _02_EditTheExistingLanguage(string existingLanguage, string existingLanguageLevel, string newLanguage, string newLanguageLevel, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
@@ -125,8 +125,8 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("existing Language Level", existingLanguageLevel);
             argumentsOfScenario.Add("new Language", newLanguage);
             argumentsOfScenario.Add("new Language Level", newLanguageLevel);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Edit the existing language", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 16
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("02- Edit the existing language", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 18
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -136,13 +136,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 17
+#line 19
  testRunner.Given("I logged in Mars portal successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 18
+#line 20
  testRunner.When(string.Format("I edit an existing \'{0}\' and \'{1}\'", existingLanguage, existingLanguageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 19
+#line 21
  testRunner.Then(string.Format("the \'{0}\' and \'{1}\' should be updated successfully", newLanguage, newLanguageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -150,15 +150,15 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Delete the existing language")]
+        [NUnit.Framework.DescriptionAttribute("03 - Delete the existing language")]
         [NUnit.Framework.TestCaseAttribute("Java", null)]
-        public void DeleteTheExistingLanguage(string language, string[] exampleTags)
+        public void _03_DeleteTheExistingLanguage(string language, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("language", language);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete the existing language", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 25
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("03 - Delete the existing language", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 28
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -168,13 +168,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 26
+#line 29
  testRunner.Given("I logged in Mars portal successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 27
+#line 30
  testRunner.When(string.Format("I delete an existing \'{0}\'", language), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 28
+#line 31
  testRunner.Then(string.Format("the \'{0}\' should be deleted successfully", language), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -182,16 +182,16 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Leave the languauge textbox empty")]
-        [NUnit.Framework.TestCaseAttribute("", "Fluent", null)]
-        public void LeaveTheLanguaugeTextboxEmpty(string language, string languageLevel, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("04 - Leave the languauge textbox empty")]
+        [NUnit.Framework.TestCaseAttribute("", "Basic", null)]
+        public void _04_LeaveTheLanguaugeTextboxEmpty(string language, string languageLevel, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("language", language);
             argumentsOfScenario.Add("language level", languageLevel);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Leave the languauge textbox empty", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 34
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("04 - Leave the languauge textbox empty", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 38
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -201,30 +201,30 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 35
+#line 39
  testRunner.Given("I logged in Mars portal successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 36
+#line 40
  testRunner.When(string.Format("I create a new \'{0}\' and \'{1}\'", language, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 37
- testRunner.Then(string.Format("the \'{0}\' should not be created", language), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 41
+ testRunner.Then(string.Format("the \'{0}\' and \'{1}\' should be created successfully", language, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Add special character in language field")]
+        [NUnit.Framework.DescriptionAttribute("05 - Add special character in language field")]
         [NUnit.Framework.TestCaseAttribute("!@#$", "Fluent", null)]
-        public void AddSpecialCharacterInLanguageField(string language, string languageLevel, string[] exampleTags)
+        public void _05_AddSpecialCharacterInLanguageField(string language, string languageLevel, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("language", language);
             argumentsOfScenario.Add("language level", languageLevel);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add special character in language field", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 43
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("05 - Add special character in language field", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 47
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -234,30 +234,32 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 44
+#line 48
  testRunner.Given("I logged in Mars portal successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 45
+#line 49
  testRunner.When(string.Format("I create a new \'{0}\' and \'{1}\'", language, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 46
- testRunner.Then(string.Format("the \'{0}\' should not be created", language), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 50
+ testRunner.Then(string.Format("the \'{0}\' and \'{1}\' should be created successfully", language, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Check if user able to cancel language and level field while editing the field")]
-        [NUnit.Framework.TestCaseAttribute("Python", "Basic", null)]
-        public void CheckIfUserAbleToCancelLanguageAndLevelFieldWhileEditingTheField(string existingLanguage, string existingLanguageLevel, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("06 - Check if user able to cancel language and level field while editing the fiel" +
+            "d")]
+        [NUnit.Framework.TestCaseAttribute("!@#$", "Fluent", null)]
+        public void _06_CheckIfUserAbleToCancelLanguageAndLevelFieldWhileEditingTheField(string existingLanguage, string existingLanguageLevel, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("existing Language", existingLanguage);
             argumentsOfScenario.Add("existing Language Level", existingLanguageLevel);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Check if user able to cancel language and level field while editing the field", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 52
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("06 - Check if user able to cancel language and level field while editing the fiel" +
+                    "d", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 56
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -267,13 +269,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 53
+#line 57
  testRunner.Given("I logged in Mars portal successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 54
+#line 58
  testRunner.When(string.Format("I edit an existing \'{0}\' and \'{1}\'", existingLanguage, existingLanguageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 55
+#line 59
  testRunner.Then("I have to cancel by clicking cancel button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

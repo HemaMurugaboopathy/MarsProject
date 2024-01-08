@@ -53,7 +53,7 @@ namespace Mars.Pages
             Thread.Sleep(2000);
 
             //Click edit icon 
-            IWebElement editIcon = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[1]/i"));
+            IWebElement editIcon = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[text()='{existingSkills}']/following-sibling::td[last()]/span[1]"));
             editIcon.Click();
 
         }
@@ -97,10 +97,10 @@ namespace Mars.Pages
 
         public void Delete_SkillsPage(string existingSkills)
         {
-            Thread.Sleep(3000);
+            Wait.WaitToBeClickable(driver, "XPath", $"//div[@class='twelve wide column scrollTable']//td[text()='{existingSkills}']/following-sibling::td[last()]/span[2]", 5);
 
             //Delete the skill
-            IWebElement deleteIcon = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[text()='{existingSkills}']"));
+            IWebElement deleteIcon = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[text()='{existingSkills}']/following-sibling::td[last()]/span[2]"));
             deleteIcon.Click();
             
         }
@@ -109,13 +109,23 @@ namespace Mars.Pages
         {
             try
             {
-                IWebElement deleteLanguage = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[text()='{skills}']"));
-                return deleteLanguage.Text;
+                IWebElement deleteSkills = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[text()='{skills}']"));
+                return deleteSkills.Text;
             }
             catch (NoSuchElementException)
             {
                 return null;
             }
+        }
+
+        public string getMessage()
+        {
+            Wait.WaitToExist(driver, "XPath", "//div[@class='ns-box-inner']", 2);
+
+            //Get the text message after entering skill and skill level
+            IWebElement successMessage = driver.FindElement(By.XPath("//div[@class='ns-box-inner']"));
+
+            return successMessage.Text;
         }
     }
 }

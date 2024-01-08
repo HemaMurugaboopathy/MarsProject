@@ -32,6 +32,7 @@ namespace Mars.Pages
 
         public string getLanguage(string language)
         {
+            Thread.Sleep(5000);
             IWebElement newLanguage = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[text()='{language}']"));
             return newLanguage.Text;
         }
@@ -92,6 +93,7 @@ namespace Mars.Pages
         }
         public void Cancel_LanguagePage(string existingLanguage)
         {
+            Thread.Sleep(2000);
             Wait.WaitToBeClickable(driver, "XPath", $"//div[@class='twelve wide column scrollTable']//td[text()='{existingLanguage}']/following-sibling::td[last()]/span[1]", 5);
 
             //Click edit icon 
@@ -104,8 +106,15 @@ namespace Mars.Pages
         }
         public string getCancelLanguage()
         {
+            try
+            { 
             IWebElement cancelButton = driver.FindElement(By.XPath("//input[@value='Cancel']"));
             return cancelButton.Text;
+            }
+            catch (NoSuchElementException)
+            {
+                return null;
+            }
         }
         public void Delete_LanguagePage(string existingLanguage)
         {
@@ -117,7 +126,7 @@ namespace Mars.Pages
             Thread.Sleep(3000);
         }
 
-        public string deleteLanguage(string language)
+        public string getDeleteLanguage(string language)
         {
             try
             {
@@ -128,6 +137,16 @@ namespace Mars.Pages
             {
                 return null;
             }
+        }
+        public string getMessage()
+        {
+            Thread.Sleep(5000);
+
+           //wait.WaitToExist(driver, "XPath", "//div[@class='ns-box-inner']", 5);
+
+            //Get the text message after entering language and language level
+            IWebElement successMessage = driver.FindElement(By.XPath("//div[@class='ns-box-inner']"));
+            return successMessage.Text;
         }
     }
 }

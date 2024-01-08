@@ -8,7 +8,7 @@ using TechTalk.SpecFlow;
 namespace Mars.StepDefinitions
 {
     [Binding]
-    public class LanguageFeatureStepDefinitions: CommonDriver
+    public class LanguageFeatureStepDefinitions : CommonDriver
     {
         LoginPage loginPageobj = new LoginPage();
         LanguagePage languagePageobj = new LanguagePage();
@@ -62,38 +62,29 @@ namespace Mars.StepDefinitions
         [Then(@"the '([^']*)' should be deleted successfully")]
         public void ThenTheShouldBeDeletedSuccessfully(string language)
         {
-            string deleteLanguage = languagePageobj.deleteLanguage(language);
+            string deletedLanguage = languagePageobj.getDeleteLanguage(language);
 
-            Assert.That(deleteLanguage == null, "Language get deleted successfully");
+
+            Assert.That(deletedLanguage == null, "Expected language has not been deleted");
         }
-        [Then(@"the '([^']*)' should not be created")]
-        public void ThenTheShouldNotBeCreated(string newLanguage)
+
+        [Then(@"the '([^']*)' should be shown on the language page")]
+        public void ThenTheShouldBeShownOnTheSkillPage(string expectedMessage)
         {
+            string actualMessage = languagePageobj.getMessage();
 
-            string updatedLanguage = languagePageobj.getUpdatedLanguage(newLanguage);
-
-
-            Assert.That(updatedLanguage == null, "Empty text box not created");
-
+            Assert.That(expectedMessage == actualMessage, "Language get deleted successfully");
+            Assert.That(expectedMessage == actualMessage, "!@#$ has been added to your languages");
+            Assert.That(expectedMessage == actualMessage, "Please enter language and level");
         }
 
-        [Then(@"the '([^']*)' not to be created")]
-        public void ThenTheNotToBeCreated(string newLanguage)
-        {
-            string updatedLanguage = languagePageobj.getUpdatedLanguage(newLanguage);
-
-
-            Assert.That(updatedLanguage == null, "Special characters are not allowed");
-        }
         [Then(@"I have to cancel by clicking cancel button")]
         public void ThenIHaveToCancelByClickingCancelButton()
         {
-            
             string cancelLanguage = languagePageobj.getCancelLanguage();
-
-            Assert.That(cancelLanguage == null, "Canceled successfully");
+            Assert.That(string.IsNullOrEmpty(cancelLanguage), Is.True, "Cancelled successfully");
         }
 
 
-    }
+    }   
 }
