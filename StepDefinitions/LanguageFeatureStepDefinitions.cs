@@ -19,6 +19,13 @@ namespace Mars.StepDefinitions
             loginPageobj.LoginActions();
         }
 
+        [When(@"I delete all records in the language page")]
+        public void WhenIDeleteAllRecordsInTheLanguagePage()
+        {
+            languagePageobj.Delete_All();
+        }
+
+
         [When(@"I create a new '([^']*)' and '([^']*)'")]
         public void WhenICreateANewAnd(string language, string languageLevel)
         {
@@ -59,23 +66,12 @@ namespace Mars.StepDefinitions
             languagePageobj.Delete_LanguagePage(language);
         }
 
-        [Then(@"the '([^']*)' should be deleted successfully")]
-        public void ThenTheShouldBeDeletedSuccessfully(string language)
-        {
-            string deletedLanguage = languagePageobj.getDeleteLanguage(language);
-
-
-            Assert.That(deletedLanguage == null, "Expected language has not been deleted");
-        }
-
         [Then(@"the '([^']*)' should be shown on the language page")]
         public void ThenTheShouldBeShownOnTheSkillPage(string expectedMessage)
         {
             string actualMessage = languagePageobj.getMessage();
 
-            Assert.That(expectedMessage == actualMessage, "Language get deleted successfully");
-            Assert.That(expectedMessage == actualMessage, "!@#$ has been added to your languages");
-            Assert.That(expectedMessage == actualMessage, "Please enter language and level");
+            Assert.That(expectedMessage == actualMessage, "Expected message occurred successfully");
         }
 
         [Then(@"I have to cancel by clicking cancel button")]

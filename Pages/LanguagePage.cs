@@ -1,18 +1,34 @@
 ﻿using Mars.Utilities;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using static System.Collections.Specialized.BitVector32;
 
 namespace Mars.Pages
 {
     public class LanguagePage: CommonDriver
     {
-        public void Create_LanguagePage(string language, string languageLevel)
+        public void Delete_All()
         {
-            Thread.Sleep(3000);
+            try
+            {
+                Wait.WaitToBeClickable(driver, "XPath", "//div[@data-tab='first']//i[@class='remove icon']", 8);
+            }
+            catch (WebDriverTimeoutException e)
+            {
+                return;
+            }
 
+            IReadOnlyCollection<IWebElement> deleteButtons = driver.FindElements(By.XPath("//div[@data-tab='first']//i[@class='remove icon']"));
+            //Delete all records in the list
+            foreach (IWebElement deleteButton in deleteButtons)
+            {
+                deleteButton.Click();
+            }
+        }
+
+        public void Create_LanguagePage(string language, string languageLevel)
+             {
             //Create add new button
-            IWebElement addNewButton = driver.FindElement(By.XPath("//div[@class='twelve wide column scrollTable']//th[@class='right aligned']/div"));
+            IWebElement addNewButton = driver.FindElement(By.XPath("//div[@class='four wide column' and h3='Languages']/following-sibling::div[@class='twelve wide column scrollTable']//th[@class='right aligned']/div"));
             addNewButton.Click();
 
             //Enter language in place holder
@@ -27,31 +43,30 @@ namespace Mars.Pages
             //Click to add in list
             IWebElement addButton = driver.FindElement(By.XPath("//input[@value='Add']"));
             addButton.Click();
-            Thread.Sleep(2000);
         }
 
         public string getLanguage(string language)
         {
-            Thread.Sleep(5000);
-            IWebElement newLanguage = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[text()='{language}']"));
+            Wait.WaitToBeClickable(driver, "XPath", $"//div[@class='four wide column' and h3='Languages']/following-sibling::div[@class='twelve wide column scrollTable']//td[text()='{language}']", 5);
+
+            IWebElement newLanguage = driver.FindElement(By.XPath($"//div[@class='four wide column' and h3='Languages']/following-sibling::div[@class='twelve wide column scrollTable']//td[text()='{language}']"));
             return newLanguage.Text;
         }
 
         public string getLanguageLevel(string languageLevel)
         {
-            IWebElement newLanguageLevel = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[text()='{languageLevel}']"));
+            IWebElement newLanguageLevel = driver.FindElement(By.XPath($"//div[@class='four wide column' and h3='Languages']/following-sibling::div[@class='twelve wide column scrollTable']//td[text()='{languageLevel}']"));
             return newLanguageLevel.Text;
         }
 
         public void Edit_LanguagePage(string existingLanguage, string existinLanguageLevel)
         {
-            Wait.WaitToBeClickable(driver, "XPath", $"//div[@class='twelve wide column scrollTable']//td[text()='{existingLanguage}']/following-sibling::td[last()]/span[1]", 5);
+            Wait.WaitToBeClickable(driver, "XPath", $"//div[@class='four wide column' and h3='Languages']/following-sibling::div[@class='twelve wide column scrollTable']//td[text()='{existingLanguage}']/following-sibling::td[last()]/span[1]", 5);
 
             //Click edit icon 
-            IWebElement editIcon = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[text()='{existingLanguage}']/following-sibling::td[last()]/span[1]"));
+            IWebElement editIcon = driver.FindElement(By.XPath($"//div[@class='four wide column' and h3='Languages']/following-sibling::div[@class='twelve wide column scrollTable']//td[text()='{existingLanguage}']/following-sibling::td[last()]/span[1]"));
             editIcon.Click();
         }
-
 
         public void Update_LanguagePage(string newLanguage, string newLanguageLevel)
         {
@@ -69,41 +84,8 @@ namespace Mars.Pages
             //Update the language
             IWebElement updateButton = driver.FindElement(By.XPath("//input[@value='Update']"));
             updateButton.Click();
-            Thread.Sleep(2000);
-
         }
-
-        public string getUpdatedLanguage(string language)
-        {
-            try
-            {
-                IWebElement newLanguage = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[contains(text(), '{language}')]"));
-                return newLanguage.Text;
-            }
-            catch (NoSuchElementException)
-            {
-                return null;
-            }
-        }
-
-        public string getUpdatedLanguageLevel(string languageLevel)
-        {
-            IWebElement newLanguageLevel = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[text()='{languageLevel}']"));
-            return newLanguageLevel.Text;
-        }
-        public void Cancel_LanguagePage(string existingLanguage)
-        {
-            Thread.Sleep(2000);
-            Wait.WaitToBeClickable(driver, "XPath", $"//div[@class='twelve wide column scrollTable']//td[text()='{existingLanguage}']/following-sibling::td[last()]/span[1]", 5);
-
-            //Click edit icon 
-            IWebElement editIcon = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[text()='{existingLanguage}']/following-sibling::td[last()]/span[1]"));
-            editIcon.Click();
-
-            //Cancel the language
-            IWebElement cancelButton = driver.FindElement(By.XPath("//input[@value='Cancel']"));
-            cancelButton.Click();
-        }
+        
         public string getCancelLanguage()
         {
             try
@@ -116,33 +98,19 @@ namespace Mars.Pages
                 return null;
             }
         }
+
         public void Delete_LanguagePage(string existingLanguage)
         {
-            Wait.WaitToBeClickable(driver, "XPath", $"//div[@class='twelve wide column scrollTable']//td[text()='{existingLanguage}']/following-sibling::td[last()]/span[2]", 5);
+            Wait.WaitToBeClickable(driver, "XPath", $"//div[@class='four wide column' and h3='Languages']/following-sibling::div[@class='twelve wide column scrollTable']//td[text()='{existingLanguage}']/following-sibling::td[last()]/span[2]", 5);
 
             //Delete the language
-            IWebElement deleteIcon = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[text()='{existingLanguage}']/following-sibling::td[last()]/span[2]"));
+            IWebElement deleteIcon = driver.FindElement(By.XPath($"//div[@class='four wide column' and h3='Languages']/following-sibling::div[@class='twelve wide column scrollTable']//td[text()='{existingLanguage}']/following-sibling::td[last()]/span[2]"));
             deleteIcon.Click();
-            Thread.Sleep(3000);
         }
 
-        public string getDeleteLanguage(string language)
-        {
-            try
-            {
-                IWebElement deleteLanguage = driver.FindElement(By.XPath($"//div[@class='twelve wide column scrollTable']//td[text()='{language}']"));
-                return deleteLanguage.Text;
-            }
-            catch(NoSuchElementException)
-            {
-                return null;
-            }
-        }
         public string getMessage()
         {
-            Thread.Sleep(5000);
-
-           //wait.WaitToExist(driver, "XPath", "//div[@class='ns-box-inner']", 5);
+            Wait.WaitToExist(driver, "XPath", "//div[@class='ns-box-inner']", 2);
 
             //Get the text message after entering language and language level
             IWebElement successMessage = driver.FindElement(By.XPath("//div[@class='ns-box-inner']"));

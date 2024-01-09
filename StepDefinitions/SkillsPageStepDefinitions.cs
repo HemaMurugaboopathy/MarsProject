@@ -17,6 +17,14 @@ namespace Mars.StepDefinitions
         {
             profilePageobj.GoToskillsPage();
         }
+
+        [Then(@"I delete all records in the skills page")]
+        public void ThenIDeleteAllRecordsInTheSkillsPage()
+        {
+            skillsPageobj.Delete_All();
+        }
+
+
         [Then(@"I create a new '([^']*)' and '([^']*)'")]
         public void ThenICreateANewAnd(string skills, string skillLevel)
         {
