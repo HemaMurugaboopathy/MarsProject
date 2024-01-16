@@ -10,8 +10,13 @@ namespace Mars.StepDefinitions
     [Binding]
     public class LanguageFeatureStepDefinitions : CommonDriver
     {
-        LoginPage loginPageobj = new LoginPage();
-        LanguagePage languagePageobj = new LanguagePage();
+        LoginPage loginPageobj;
+        LanguagePage languagePageobj;
+        public LanguageFeatureStepDefinitions()
+        {
+            loginPageobj = new LoginPage();
+            languagePageobj = new LanguagePage();
+        }
 
         [Given(@"I logged in Mars portal successfully")]
         public void GivenILoggedInMarsPortalSuccessfully()

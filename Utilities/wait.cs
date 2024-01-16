@@ -5,6 +5,13 @@ namespace Mars.Utilities
 {
     public class Wait
     {
+        public static void WaitToBeClickable(IWebDriver driver, By xPath, int seconds)
+        {
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, seconds));
+            
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(xPath));
+        }
+
         public static void WaitToBeClickable(IWebDriver driver, string locatorType, string locatorValue, int seconds)
         {
             var wait = new WebDriverWait(driver, new TimeSpan(0, 0, seconds));
