@@ -6,6 +6,25 @@ namespace Mars.Pages
 {
     public class SkillsPage: CommonDriver
     {
+        //Finding elements by ID
+        private IWebElement AddNewButtonElement => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/thead/tr/th[3]/div"));
+        private IWebElement AddTextboxElement => driver.FindElement(By.XPath("//input[@placeholder='Add Skill']"));
+        private IWebElement SkillLevelDropdownElement => driver.FindElement(By.XPath("//select[@name='level']"));
+        private IWebElement AddButtonElement => driver.FindElement(By.XPath("//input[@value='Add']"));
+        
+        private Func<string, IWebElement> NewSkillsElement = skills => driver.FindElement(By.XPath($"//div[@class='four wide column' and h3='Skills']/following-sibling::div[@class='twelve wide column scrollTable']//td[text()='{skills}']"));
+        
+        private Func<string, IWebElement> NewSkillsLevelElement = skillLevel => driver.FindElement(By.XPath($"//div[@class='four wide column' and h3='Skills']/following-sibling::div[@class='twelve wide column scrollTable']//td[text()='{skillLevel}']"));
+
+        private Func<string, By> EditIconXPath = existingSkills => By.XPath($"//div[@class='four wide column' and h3='Skills']/following-sibling::div[@class='twelve wide column scrollTable']//td[text()='{existingSkills}']/following-sibling::td[last()]/span[1]");
+        private IWebElement EditTextBoxElement => driver.FindElement(By.XPath("//input[@placeholder='Add Skill']"));
+       
+        private IWebElement UpdateButtonElement => driver.FindElement(By.XPath("//input[@value='Update']"));
+        private Func<string,IWebElement> UpdatedSkillElement =skills => driver.FindElement(By.XPath($"//div[@class='four wide column' and h3='Skills']/following-sibling::div[@class='twelve wide column scrollTable']//td[contains(text(), '{skills}')]"));
+        private IWebElement SuccessMessageElement => driver.FindElement(By.XPath("//div[@class='ns-box-inner']"));
+
+        private Func<string, By> DeleteIconXPath = existingSkill => By.XPath($"//div[@class='four wide column' and h3='Skills']/following-sibling::div[@class='twelve wide column scrollTable']//td[text()='{existingSkill}']/following-sibling::td[last()]/span[@class='button'][2]");
+
         public void Delete_All()
         {
             try
@@ -16,7 +35,6 @@ namespace Mars.Pages
             {
                 return;
             }
-
             IReadOnlyCollection<IWebElement> deleteButtons = driver.FindElements(By.XPath("//div[@data-tab='second']//i[@class='remove icon']"));
             //Delete all records in the list
             foreach (IWebElement deleteButton in deleteButtons)
@@ -27,101 +45,82 @@ namespace Mars.Pages
         public void Create_SkillsPage(string skills, string skillLevel)
         {
             //Create add new button
-            IWebElement addnewButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/thead/tr/th[3]/div"));
-            addnewButton.Click();
+            AddNewButtonElement.Click();
 
             //Enter skill in place holder
-            IWebElement addTextbox = driver.FindElement(By.XPath("//input[@placeholder='Add Skill']"));
-            addTextbox.SendKeys(skills);
+            AddTextboxElement.SendKeys(skills);
 
             //Click dropdown icon to select level
-            IWebElement skillLevelDropdown = driver.FindElement(By.XPath("//select[@name='level']"));
-
-            SelectElement chooseskillLevel = new SelectElement(skillLevelDropdown);
+            SelectElement chooseskillLevel = new SelectElement(SkillLevelDropdownElement);
             chooseskillLevel.SelectByValue(skillLevel);
           
-
             //Click to add in list
-            IWebElement addButton = driver.FindElement(By.XPath("//input[@value='Add']"));
-            addButton.Click();
+            AddButtonElement.Click();
         }
 
         public string getSkills(string skills)
         {
             Wait.WaitToExist(driver, "XPath", $"//div[@class='four wide column' and h3='Skills']/following-sibling::div[@class='twelve wide column scrollTable']//td[text()='{skills}']", 5);
 
-            IWebElement newSkills = driver.FindElement(By.XPath($"//div[@class='four wide column' and h3='Skills']/following-sibling::div[@class='twelve wide column scrollTable']//td[text()='{skills}']"));
-            return newSkills.Text;
+            return NewSkillsElement(skills).Text;
         }
-
         public string getSkillLevel(string skillLevel)
         {
             Wait.WaitToExist(driver, "XPath", $"//div[@class='four wide column' and h3='Skills']/following-sibling::div[@class='twelve wide column scrollTable']//td[text()='{skillLevel}']", 2);
 
-            IWebElement newskillLevel = driver.FindElement(By.XPath($"//div[@class='four wide column' and h3='Skills']/following-sibling::div[@class='twelve wide column scrollTable']//td[text()='{skillLevel}']"));
-            return newskillLevel.Text;
+            return NewSkillsLevelElement(skillLevel).Text;
         }
-
         public void Edit_SkillsPage(string existingSkills, String existingSkillsLevel)
         {
-            
-            Wait.WaitToBeClickable(driver, "XPath", $"//div[@class='four wide column' and h3='Skills']/following-sibling::div[@class='twelve wide column scrollTable']//td[text()='{existingSkills}']/following-sibling::td[last()]/span[1]", 5);
+            By xPath = EditIconXPath(existingSkills);
+            Wait.WaitToBeClickable(driver, xPath, 5);
 
             //Click edit icon 
-            IWebElement editIcon = driver.FindElement(By.XPath($"//div[@class='four wide column' and h3='Skills']/following-sibling::div[@class='twelve wide column scrollTable']//td[text()='{existingSkills}']/following-sibling::td[last()]/span[1]"));
+            IWebElement editIcon = driver.FindElement(xPath);
             editIcon.Click();
-
         }
-
         public void Update_SkillsPage(string newSkills, string newSkillLevel)
         {
             Wait.WaitToExist(driver, "XPath", "//input[@placeholder='Add Skill']", 5);
 
             //Edit the skill in the textbox
-            IWebElement editTextbox = driver.FindElement(By.XPath("//input[@placeholder='Add Skill']"));
-            editTextbox.Clear();
-            editTextbox.SendKeys(newSkills);
+            EditTextBoxElement.Clear();
+            EditTextBoxElement.SendKeys(newSkills);
 
             //Edit the skill level 
-            IWebElement languageLevelDropdown = driver.FindElement(By.XPath("//select[@name='level']"));
-            SelectElement editlevelOption = new SelectElement(languageLevelDropdown);
+            SelectElement editlevelOption = new SelectElement(SkillLevelDropdownElement);
             editlevelOption.SelectByValue(newSkillLevel);
 
             //Update the skill
-            IWebElement updateButton = driver.FindElement(By.XPath("//input[@value='Update']"));
-            updateButton.Click();
+            UpdateButtonElement.Click();
         }
-
         public string getUpdatedSkills(string skills)
         {
             try
             {
-                IWebElement newSkills = driver.FindElement(By.XPath($"//div[@class='four wide column' and h3='Skills']/following-sibling::div[@class='twelve wide column scrollTable']//td[contains(text(), '{skills}')]"));
-                return newSkills.Text;
+                //IWebElement newSkills = driver.FindElement(By.XPath($"//div[@class='four wide column' and h3='Skills']/following-sibling::div[@class='twelve wide column scrollTable']//td[contains(text(), '{skills}')]"));
+                 return UpdatedSkillElement(skills).Text;
             }
             catch (NoSuchElementException)
             {
                 return null;
             }
         }
-
         public void Delete_SkillsPage(string existingSkill)
         {
-            Wait.WaitToBeClickable(driver, "XPath", $"//div[@class='four wide column' and h3='Skills']/following-sibling::div[@class='twelve wide column scrollTable']//td[text()='{existingSkill}']/following-sibling::td[last()]/span[@class='button'][2]", 5);
+            By xPath = DeleteIconXPath(existingSkill);
+            Wait.WaitToBeClickable(driver, xPath, 5);
 
             //Delete the skill
-            IWebElement deleteIcon = driver.FindElement(By.XPath($"//div[@class='four wide column' and h3='Skills']/following-sibling::div[@class='twelve wide column scrollTable']//td[text()='{existingSkill}']/following-sibling::td[last()]/span[@class='button'][2]"));
+            IWebElement deleteIcon = driver.FindElement(xPath);
             deleteIcon.Click();
         }
-
         public string getMessage()
         {
             Wait.WaitToExist(driver, "XPath", "//div[@class='ns-box-inner']", 2);
 
             //Get the text message after entering skill and skill level
-            IWebElement successMessage = driver.FindElement(By.XPath("//div[@class='ns-box-inner']"));
-
-            return successMessage.Text;
+            return SuccessMessageElement.Text;
         }
     }
 }

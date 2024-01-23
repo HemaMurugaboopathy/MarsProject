@@ -9,8 +9,13 @@ namespace Mars.StepDefinitions
     [Binding]
     public class SkillsPageStepDefinitions : CommonDriver
     {
-        ProfilePage profilePageobj = new ProfilePage();
-        SkillsPage skillsPageobj = new SkillsPage();
+        ProfilePage profilePageobj;
+        SkillsPage skillsPageobj;
+        public SkillsPageStepDefinitions()
+        {
+             profilePageobj = new ProfilePage();
+             skillsPageobj = new SkillsPage();
+        }
 
         [When(@"I navigate to skill page")]
         public void WhenINavigateToSkillPage()
